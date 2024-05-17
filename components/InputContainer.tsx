@@ -13,7 +13,6 @@ interface props {
 }
 const InputContainer = ({inputText, setInputText}: props) => {
   return (
-    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="add a task"
@@ -26,19 +25,16 @@ const InputContainer = ({inputText, setInputText}: props) => {
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
-    </View>
+
+
+   
   );
 };
 
 export default InputContainer;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 20,
-  },
+
   inputContainer: {
     width: '90%',
     backgroundColor: 'white',

@@ -1,13 +1,7 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
- 
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import InputContainer from './components/InputContainer';
+import TodoContainer from './components/TodoContainer';
 
 const App = () => {
   const [inputText, setInputText] = useState('');
@@ -18,8 +12,10 @@ const App = () => {
         <View>
           <Text style={styles.headingText}>Todo List</Text>
         </View>
-
-        <InputContainer  inputText={inputText} setInputText={setInputText}/>
+        <View style={styles.container}>
+          <InputContainer inputText={inputText} setInputText={setInputText} />
+          <TodoContainer />
+        </View>
       </SafeAreaView>
     </ScrollView>
   );
@@ -44,5 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAF0F1',
     flexGrow: 1,
   },
-  
+  container: {
+    width: '100%',
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 20,
+    gap:20
+  },
 });
