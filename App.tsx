@@ -1,11 +1,33 @@
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import InputContainer from './components/InputContainer';
 import TodoContainer from './components/TodoContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [inputText, setInputText] = useState('');
+  const [todoArray, setTodoArray] = useState([{}]);
+  const storeData = async (value: any) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('todos', value);
+    } catch (e) {}
+  };
 
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('todos');
+      return jsonValue != null ? JSON.parse(jsonValue) : [{}];
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    const setTodos = async () => {
+      const todos = await getData();
+      setTodoArray(todos);
+    };
+    setTodos();
+  }, []);
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <SafeAreaView style={styles.main}>
@@ -45,6 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     marginTop: 20,
-    gap:20
+    gap: 20,
   },
 });
