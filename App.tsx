@@ -42,6 +42,7 @@ const App = () => {
   const toggleMark = async (index: number) => {
     todoArray[index].completed = !todoArray[index].completed;
     await storeData(todoArray);
+    setTodos();
   };
   useEffect(() => {
     setTodos();

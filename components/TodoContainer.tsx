@@ -16,8 +16,10 @@ const TodoContainer = ({todoArray, deleteTask, toggleMark}: props) => {
         {todoArray.length > 0 ? (
           todoArray.map((todo: any, index: any) => (
             <View style={styles.todos} key={index}>
-              <Text style={styles.number}>{index + 1}.</Text>
-              <Text style={styles.task}>{todo.task}</Text>
+              <Text style={[styles.number]}>{index + 1}.</Text>
+              <Text style={[styles.task, todo.completed && styles.status]}>
+                {todo.task}
+              </Text>
               <View style={styles.utilButtons}>
                 <BouncyCheckbox
                   fillColor="#45CE30"
@@ -87,5 +89,9 @@ const styles = StyleSheet.create({
   },
   number: {
     color: 'black',
+  },
+  status: {
+    textDecorationLine: 'line-through',
+    color: 'red',
   },
 });
