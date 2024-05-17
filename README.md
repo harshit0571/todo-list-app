@@ -1,4 +1,7 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+![Screenshot 2024-05-17 at 14 59 46](https://github.com/harshit0571/todo-list-app/assets/62325935/e7a01a8e-aadb-4967-b9dd-7423ce451256)
+
+
 
 # Getting Started
 
