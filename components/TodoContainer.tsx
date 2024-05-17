@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 interface props {
   todoArray: any;
-  deleteTask:any
+  deleteTask: any;
+  toggleMark: any;
 }
-const TodoContainer = ({todoArray, deleteTask}: props) => {
+const TodoContainer = ({todoArray, deleteTask, toggleMark}: props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.headingText}>Tasks List:</Text>
@@ -21,8 +22,14 @@ const TodoContainer = ({todoArray, deleteTask}: props) => {
                 <BouncyCheckbox
                   fillColor="#45CE30"
                   isChecked={todo.completed}
+                  onPress={() => {
+                    toggleMark(index);
+                  }}
                 />
-                <TouchableOpacity onPress={()=>{deleteTask(index)}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    deleteTask(index);
+                  }}>
                   <Text>❌</Text>
                 </TouchableOpacity>
               </View>

@@ -6,7 +6,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [inputText, setInputText] = useState('');
-  const [todoArray, setTodoArray] = useState([]);
+  interface Todo {
+    id: number;
+    task: string;
+    completed: boolean;
+  }
+  const [todoArray, setTodoArray] = useState<Todo[]>([]);
   const storeData = async (value: any) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -33,6 +38,11 @@ const App = () => {
     const todos = await getData();
     setTodoArray(todos);
   };
+
+  const toggleMark = async (index: number) => {
+    todoArray[index].completed = !todoArray[index].completed;
+    await storeData(todoArray);
+  };
   useEffect(() => {
     setTodos();
   }, []);
@@ -50,7 +60,11 @@ const App = () => {
             setTodoArray={setTodoArray}
             todoArray={todoArray}
           />
-          <TodoContainer todoArray={todoArray} deleteTask={deleteTask} />
+          <TodoContainer
+            todoArray={todoArray}
+            deleteTask={deleteTask}
+            toggleMark={toggleMark}
+          />
         </View>
       </SafeAreaView>
     </ScrollView>
