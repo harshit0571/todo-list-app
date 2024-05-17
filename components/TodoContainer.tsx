@@ -1,5 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const TodoContainer = () => {
   return (
@@ -7,19 +9,30 @@ const TodoContainer = () => {
       <Text style={styles.headingText}>Tasks List:</Text>
       <View style={styles.todoContainer}>
         <View style={styles.todos}>
-          <Text>1.</Text>
-          <Text>Go to Gym</Text>
-          <Text>delete</Text>
+          <Text style={styles.number}>1.</Text>
+          <Text style={styles.task}>Go to Gym</Text>
+          <View style={styles.utilButtons}>
+            <BouncyCheckbox fillColor="#45CE30" />
+            <Text>❌</Text>
+          </View>
         </View>
         <View style={styles.todos}>
-          <Text>1.</Text>
-          <Text>Go to Gym</Text>
-          <Text>delete</Text>
+          <Text style={styles.number}>1.</Text>
+          <Text style={styles.task}>Go to Gym</Text>
+          <View style={styles.utilButtons}>
+            <BouncyCheckbox fillColor="#45CE30" />
+            <Text>❌</Text>
+          </View>
         </View>
         <View style={styles.todos}>
-          <Text>1.</Text>
-          <Text>Go to Gym</Text>
-          <Text>delete</Text>
+          <Text style={styles.number}>1.</Text>
+          <Text style={styles.task}>Go to Gym</Text>
+          <View style={styles.utilButtons}>
+            <BouncyCheckbox fillColor="#45CE30" />
+            <TouchableOpacity>
+              <Text>❌</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -46,15 +59,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    gap:10
+    gap: 10,
   },
   todos: {
     display: 'flex',
     width: '90%',
     padding: 5,
     backgroundColor: '#EAF0F1',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    flexWrap:'wrap'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  utilButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  task: {
+    flex: 1,
+    paddingHorizontal: 4,
+    fontSize: 15,
+    color: 'black',
+  },
+  number: {
+    color: 'black',
   },
 });
