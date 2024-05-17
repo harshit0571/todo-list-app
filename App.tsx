@@ -6,26 +6,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [inputText, setInputText] = useState('');
-  const [todoArray, setTodoArray] = useState([{}]);
+  const [todoArray, setTodoArray] = useState([]);
   const storeData = async (value: any) => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('todos', value);
+      await AsyncStorage.setItem('todos', jsonValue);
     } catch (e) {}
   };
 
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('todos');
-      return jsonValue != null ? JSON.parse(jsonValue) : [{}];
+      return jsonValue != null ? JSON.parse(jsonValue) : [];
     } catch (e) {}
   };
 
+  const deleteTask = async (index: number) => {
+    try {
+      console.log(index);
+      todoArray.splice(index, 1);
+      await storeData(todoArray);
+      setTodos();
+    } catch (error) {}
+  };
+  const setTodos = async () => {
+    const todos = await getData();
+    setTodoArray(todos);
+  };
   useEffect(() => {
-    const setTodos = async () => {
-      const todos = await getData();
-      setTodoArray(todos);
-    };
     setTodos();
   }, []);
   return (
@@ -35,8 +43,14 @@ const App = () => {
           <Text style={styles.headingText}>Todo List</Text>
         </View>
         <View style={styles.container}>
-          <InputContainer inputText={inputText} setInputText={setInputText} />
-          <TodoContainer />
+          <InputContainer
+            inputText={inputText}
+            setInputText={setInputText}
+            storeData={storeData}
+            setTodoArray={setTodoArray}
+            todoArray={todoArray}
+          />
+          <TodoContainer todoArray={todoArray} deleteTask={deleteTask} />
         </View>
       </SafeAreaView>
     </ScrollView>

@@ -3,37 +3,34 @@ import React from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const TodoContainer = () => {
+interface props {
+  todoArray: any;
+  deleteTask:any
+}
+const TodoContainer = ({todoArray, deleteTask}: props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.headingText}>Tasks List:</Text>
       <View style={styles.todoContainer}>
-        <View style={styles.todos}>
-          <Text style={styles.number}>1.</Text>
-          <Text style={styles.task}>Go to Gym</Text>
-          <View style={styles.utilButtons}>
-            <BouncyCheckbox fillColor="#45CE30" />
-            <Text>❌</Text>
-          </View>
-        </View>
-        <View style={styles.todos}>
-          <Text style={styles.number}>1.</Text>
-          <Text style={styles.task}>Go to Gym</Text>
-          <View style={styles.utilButtons}>
-            <BouncyCheckbox fillColor="#45CE30" />
-            <Text>❌</Text>
-          </View>
-        </View>
-        <View style={styles.todos}>
-          <Text style={styles.number}>1.</Text>
-          <Text style={styles.task}>Go to Gym</Text>
-          <View style={styles.utilButtons}>
-            <BouncyCheckbox fillColor="#45CE30" />
-            <TouchableOpacity>
-              <Text>❌</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        {todoArray.length > 0 ? (
+          todoArray.map((todo: any, index: any) => (
+            <View style={styles.todos} key={index}>
+              <Text style={styles.number}>{index + 1}.</Text>
+              <Text style={styles.task}>{todo.task}</Text>
+              <View style={styles.utilButtons}>
+                <BouncyCheckbox
+                  fillColor="#45CE30"
+                  isChecked={todo.completed}
+                />
+                <TouchableOpacity onPress={()=>{deleteTask(index)}}>
+                  <Text>❌</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))
+        ) : (
+          <Text>Error: No todos found</Text>
+        )}
       </View>
     </View>
   );
